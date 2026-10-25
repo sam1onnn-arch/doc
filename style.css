@@ -5,6 +5,7 @@
   --panel:#767b9c; --panel-fg:#ffffff; --wave:#8c2347;
   --ok:#17653a; --ok-soft:#dcf2e4; --warn:#8a5a00; --warn-soft:#fdf0cf; --bad:#b3261e; --bad-soft:#fbe2df;
   --hero-bg:#f2f3f5; --hero-fg:#232b60; --hero-mute:#5b6190;
+  color-scheme:light;
   --font-d:'Inter Tight','Segoe UI',system-ui,sans-serif; --font-b:'Manrope','Segoe UI',system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -16,7 +17,9 @@
   --accent:#b4bbf2; --accent-fg:#10142e; --accent-soft:#2a3170; --panel:#4a5190; --panel-fg:#ffffff; --wave:#e07a9a;
   --ok:#74d39b; --ok-soft:#173a29; --warn:#f0c768; --warn-soft:#3b2f12; --bad:#ff8f86; --bad-soft:#431c1a; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--font-b);-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--font-b);-webkit-text-size-adjust:100%}
 a{color:var(--accent)}
 h1,h2,h3{font-family:var(--font-d);font-weight:500;line-height:1.05;letter-spacing:-.025em;text-wrap:balance;margin:0}
 button,input,select{font:inherit;color:inherit}
@@ -226,3 +229,52 @@ details.drug.isvk{border-color:var(--bad)}
 }
 @media (max-width:359px){.fields.two{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Единицы vw в режиме «телефон в широком окне» берутся от широкого окна, поэтому задаём размеры явно */
+html.m .page>h1{font-size:28px}
+html.m .hero{gap:8px;padding:18px}
+html.m .hero h1{font-size:30px}
+html.m .quote{gap:18px;padding:26px 22px 40px}
+html.m .quote svg.cup{width:56px}
+html.m .quote p{font-size:26px}
+html.m .card{padding:16px}
+html.m .res{padding:20px}
+html.m details.kr>summary h2{font-size:20px}
+
+/* Телефон в широком окне просмотра: те же правила по классам из scale.js */
+html.m860 .tiles{grid-template-columns:1fr}
+html.m860 .tile{min-height:0}
+html.m860 .calc-grid{grid-template-columns:1fr}
+html.m860 .res{position:static}
+html.m860 .abt-top{grid-template-columns:repeat(2,minmax(0,1fr))}
+html.m860 .abt-top.drug-row{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+html.m860 .abt-top .chk{grid-column:1/-1}
+html.m860 details.drug>summary{grid-template-columns:1fr auto}
+html.m860 details.drug .sm{grid-column:1/-1;order:3}
+html.m860 .sec{grid-template-columns:1fr}
+html.m700 .hero{grid-template-columns:1fr}
+html.m700 .hero-img{background-size:cover;background-position:right bottom;min-height:0}
+html.m700 .quote{flex-direction:column;align-items:flex-start;border-radius:24px}
+html.m700 .quote .wave{display:none}
+html.m700 .fields.two{grid-template-columns:1fr 1fr}
+html.m700 .pt-row{grid-template-columns:1fr}
+html.m560 .bar .wrap{padding-block:10px;gap:8px 16px}
+html.m560 .nav{gap:2px 14px;width:100%;justify-content:space-between}
+html.m560 .nav a{font-size:11px;letter-spacing:.04em;padding:10px 0}
+html.m560 main{padding-block:22px 56px}
+html.m560 .tabs{flex-wrap:nowrap;overflow-x:auto;gap:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+html.m560 .tabs::-webkit-scrollbar{display:none}
+html.m560 .tabs button{white-space:nowrap;padding:14px 0;flex:none}
+html.m560 .abt-top.drug-row{grid-template-columns:1fr}
+html.m560 .pt-row{grid-template-columns:1fr}
+html.m560 .sec label{padding:10px 6px}
+html.m560 .sec input,html.m560 .chk input{width:22px;height:22px}
+html.m560 .checks{flex-direction:column;gap:14px}
+html.m560 details.kr>summary{padding:18px 16px;gap:12px}
+html.m560 .kr-body{padding:0 16px 20px}
+html.m560 .tile{padding:18px}
+html.m560 .score{font-size:60px}
+html.m560 .big{font-size:28px}
+html.m560 .vk b{font-size:22px}
+html.m560 .cb ul{max-height:50vh}
+html.m359 .fields.two{grid-template-columns:1fr}
