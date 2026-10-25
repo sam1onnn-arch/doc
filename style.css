@@ -35,7 +35,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 main{padding-block:34px 72px}
 .page[hidden]{display:none!important}
-.page>h1{font-size:clamp(32px,6vw,66px);font-weight:600;text-transform:uppercase;letter-spacing:-.035em;line-height:.95;margin-bottom:22px}
+.page>h1{font-size:clamp(27px,6vw,66px);font-weight:600;text-transform:uppercase;letter-spacing:-.035em;line-height:.95;margin-bottom:22px}
 .lead{color:var(--muted);max-width:62ch;margin:0 0 26px}
 .wave{color:var(--wave);height:38px;margin:0 0 24px;overflow:hidden}
 .wave svg{display:block;width:100%;height:100%}
@@ -49,7 +49,7 @@ main{padding-block:34px 72px}
 /* hero */
 .hero{display:grid;grid-template-columns:6fr 6fr;align-items:center;gap:clamp(8px,3vw,40px);background:var(--hero-bg);color:var(--hero-fg);padding:clamp(18px,4vw,48px);border:1px solid var(--line)}
 .hero-text{min-width:0}
-.hero h1{font-size:clamp(32px,4.4vw,62px);font-weight:500;letter-spacing:-.035em;line-height:.98}
+.hero h1{font-size:clamp(30px,4.4vw,62px);font-weight:500;letter-spacing:-.035em;line-height:.98}
 .hero h1 span{display:block}
 .hero h1 .c{color:#767b9c}
 .hero p{margin:22px 0 28px;color:var(--hero-mute);max-width:38ch;font-size:15.5px}
@@ -188,6 +188,7 @@ details.drug.isvk{border-color:var(--bad)}
   .calc-grid{grid-template-columns:1fr}
   .res{position:static}
   .abt-top{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .abt-top.drug-row{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
   .abt-top .chk{grid-column:1/-1}
   details.drug>summary{grid-template-columns:1fr auto}
   details.drug .sm{grid-column:1/-1;order:3}
@@ -201,4 +202,26 @@ details.drug.isvk{border-color:var(--bad)}
   .fields.two{grid-template-columns:1fr 1fr}
   .pt-row{grid-template-columns:1fr}
 }
+@media (max-width:560px){
+  .bar .wrap{padding-block:10px;gap:8px 16px}
+  .nav{gap:2px 14px;width:100%;justify-content:space-between}
+  .nav a{font-size:11px;letter-spacing:.04em;padding:10px 0}
+  main{padding-block:22px 56px}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;gap:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{white-space:nowrap;padding:14px 0;flex:none}
+  .abt-top.drug-row{grid-template-columns:1fr}
+  .pt-row{grid-template-columns:1fr}
+  .sec label{padding:10px 6px}
+  .sec input,.chk input{width:22px;height:22px}
+  .checks{flex-direction:column;gap:14px}
+  details.kr>summary{padding:18px 16px;gap:12px}
+  .kr-body{padding:0 16px 20px}
+  .tile{padding:18px}
+  .score{font-size:60px}
+  .big{font-size:28px}
+  .vk b{font-size:22px}
+  .cb ul{max-height:50vh}
+}
+@media (max-width:359px){.fields.two{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
