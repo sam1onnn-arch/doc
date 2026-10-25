@@ -1,0 +1,97 @@
+<meta charset="utf-8"><title>Врачебная шпаргалка</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<header class="bar"><div class="wrap">
+  <a class="brand" href="#home"><b>Врачебная шпаргалка</b></a>
+  <nav class="nav" aria-label="Разделы">
+    <a href="#kr" data-nav="kr">Чек-листы КР</a>
+    <a href="#calc" data-nav="calc">Калькуляторы</a>
+    <a href="#abt" data-nav="abt">Антибиотики</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+
+<section class="page" id="p-home">
+  <div class="hero">
+    <div class="hero-text">
+      <h1><span>Инфекционистам — отдых,</span> <span>больным — здоровье,</span> <span class="c">кофе — реаниматологам!</span></h1>
+      <p>Шкалы, дозы и чек-листы по клиническим рекомендациям, чтобы не искать их по папкам в три часа ночи.</p>
+      <a class="cta" href="#calc">Калькуляторы<i></i></a>
+    </div>
+    <div class="hero-img" role="img" aria-label="Врач и врач в хирургической форме на фоне вирусов и бактерий"></div>
+  </div>
+
+  <div class="tiles">
+    <a class="tile" href="#calc">
+      <div class="wv" data-wave="14"></div>
+      <h2>Медицинские калькуляторы</h2>
+      <p>SMART-COP, CURB-65, SOFA, CDS, потребность в жидкости у детей, эуфиллин в шприц.</p>
+      <span class="go">Открыть</span>
+    </a>
+    <a class="tile" href="#kr">
+      <div class="wv" data-wave="14"></div>
+      <h2>Чек-листы по КР</h2>
+      <p>ОКИ и ВП у взрослых, ВП, ОРВИ и вирусные гастроэнтериты у детей. Можно отмечать пункты.</p>
+      <span class="go">Открыть</span>
+    </a>
+    <a class="tile feat" href="#abt">
+      <div class="wv" data-wave="14"></div>
+      <h2>Антибактериальная терапия</h2>
+      <p>Дозы антибиотиков по СКАТ с учётом возраста, массы тела и СКФ.</p>
+      <span class="go">Открыть</span>
+    </a>
+  </div>
+
+  <div class="quote">
+    <svg class="cup" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 38h52v18a18 18 0 0 1-18 18H34A18 18 0 0 1 16 56z"/><path d="M68 44h6a9 9 0 0 1 0 18h-8"/><path d="M30 14c-4 6 4 8 0 14M42 14c-4 6 4 8 0 14M54 14c-4 6 4 8 0 14"/></svg>
+    <p>Помни: кофе и спокойствие для реаниматолога — наш выбор.</p>
+    <div class="wave" data-wave="40"></div>
+  </div>
+  <p class="foot">Информация носит справочный характер. Перепроверяйте данные с открытых источников.<br>С ув. Горяшин</p>
+</section>
+
+<section class="page" id="p-kr" hidden>
+  <h1>Чек-листы по клиническим рекомендациям</h1>
+  <div id="kr-list"></div>
+</section>
+
+<section class="page" id="p-calc" hidden>
+  <h1>Медицинские калькуляторы</h1>
+  <div class="tabs" role="tablist" id="calc-tabs"></div>
+  <div id="calc-box"></div>
+</section>
+
+<section class="page" id="p-abt" hidden>
+  <h1>Антибактериальная терапия</h1>
+  <div class="card">
+    <div class="pt-row">
+      <label class="f"><span>Возраст</span><span class="inp"><input type="number" id="a-age" min="0" max="120" step="any" inputmode="decimal" placeholder="например, 4"><select id="a-unit" aria-label="Единица возраста"><option value="y">лет</option><option value="m">мес</option></select></span></label>
+      <label class="f"><span>Масса тела</span><span class="inp"><input type="number" id="a-kg" min="0.3" max="300" step="any" inputmode="decimal" placeholder="например, 16"><u>кг</u></span></label>
+    </div>
+    <div class="gfr-row">
+      <label class="chk"><input type="checkbox" id="a-gfr-on"><span><b>Учитывать СКФ</b></span></label>
+      <div class="renal" id="a-renal"><label class="f"><span>СКФ</span><span class="inp"><input type="number" id="a-gfr" min="0" max="200" step="any" inputmode="decimal" placeholder="например, 40"><u>мл/мин</u></span></label></div>
+    </div>
+    <p class="note" id="a-gfr-note"></p>
+    <div class="who" id="a-who"></div>
+  </div>
+  <div class="card" style="margin-top:12px;padding:12px 16px">
+    <div class="abt-top" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr)">
+      <div class="f"><span id="a-drug-l">Препарат</span><div class="cb"><input type="text" id="a-drug-in" placeholder="Нажмите и выберите препарат" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="a-list" aria-labelledby="a-drug-l"><button type="button" id="a-clear" aria-label="Очистить выбор" hidden>×</button><ul id="a-list" role="listbox" aria-labelledby="a-drug-l" hidden></ul></div></div>
+      <label class="f"><span>Путь введения</span><select id="a-route"></select></label>
+    </div>
+  </div>
+  <div id="a-out" class="drugs"></div>
+  <p class="foot" id="a-foot"></p>
+</section>
+
+</main>
+
+<script src="js/kr-data.js"></script>
+<script src="js/calcs.js"></script>
+<script src="js/abt-data.js"></script>
+<script src="js/abt-ui.js"></script>
+<script src="js/app.js"></script>
