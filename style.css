@@ -181,6 +181,7 @@ details.drug.isvk{border-color:var(--bad)}
 .dim{opacity:.6}
 .empty{padding:26px;text-align:center;color:var(--wave);font-weight:500}
 .src{font-size:12.5px;color:var(--muted)}
+.who:empty,.note:empty{display:none}
 
 @media (max-width:860px){
   .tiles{grid-template-columns:1fr}

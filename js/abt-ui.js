@@ -164,6 +164,7 @@ function initAbt(){
     opts.forEach((o,i)=>o.classList.toggle('act',i===act));
     opts[act].scrollIntoView({block:'nearest'});el.din.setAttribute('aria-activedescendant',opts[act].id);
   };
+  el.foot.innerHTML='<a href="https://doi.org/10.17513/np.318" target="_blank" rel="noopener">Программа СКАТ</a>';
   function render(){
     const P0=state(),{ageM,kg,gfr,adult}=P0;
     el.renal.classList.toggle('on',el.on.checked);
@@ -176,16 +177,16 @@ function initAbt(){
     if(isNaN(ageM)){
       el.who.innerHTML='';
       el.out.innerHTML='<div class="empty card">Введите возраст пациента, затем массу тела и выберите препарат.</div>';
-      el.foot.textContent='';return;
+      return;
     }
-    el.who.innerHTML=adult?`<span class="pill info">Взрослый</span> дозы из приложения 11 СКАТ (в/в, нормальная функция почек)`:`<span class="pill info">Ребёнок, ${ageM<24?nf(ageM,1)+' мес':nf(ageM/12,1)+' лет'}</span> дозы из приложений 12А и 12Б СКАТ${kg>0?'':' · укажите массу тела'}`;
+    el.who.innerHTML='';
     if(!sel){
       el.out.innerHTML='<div class="empty card">Нажмите на поле «Препарат» и выберите препарат из списка. Здесь появятся доза, кратность и коррекция по СКФ.</div>';
-      el.foot.textContent='';return;
+      return;
     }
     const d=srcOf(adult)[sel.i];
     el.out.innerHTML=drugCard(d,{ageM,kg,gfr,adult,useGfr:el.on.checked},true);
-    el.foot.textContent='Источник доз: Программа СКАТ, приложения 11, 12А, 12Б.';
+    
   }
   /* поле выбора препарата */
   el.din.addEventListener('focus',()=>{el.din.select();openList('')});
