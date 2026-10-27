@@ -7,8 +7,12 @@ const fmtN=(x,u)=>{
   return s;
 };
 const rng=(a,b,u='мг')=>{const A=fmtN(a,u),B=fmtN(b,u);let t=(A===B?A:`${A}–${B}`)+' '+u;if(u==='мг'&&b>=1000)t+=A===B?` (${nf(a/1000,2)} г)`:` (${nf(a/1000,2)}–${nf(b/1000,2)} г)`;return t};
-const every=n=>n>=1?(24%n===0||Math.abs(24/n-Math.round(24/n))<.01?`каждые ${Math.round(24/n)} ч (${n} р/сут)`:`${nf(n,1)} раза в сутки`):`каждые ${Math.round(24/n)} ч`;
-const timesTxt=n=>n===1?'1 раз':(n<5?`${n} раза`:`${n} раз`);
+const NUMW={1:'одно',2:'дву',3:'трёх',4:'четырёх',5:'пяти',6:'шести',8:'восьми'};
+const kratn=n=>(NUMW[n]||n+'-')+'кратный';
+const kratnP=n=>(NUMW[n]||n+'-')+'кратном';
+const freqText=(a,b)=>a===b?kratn(a)+' приём':a+'–'+b+'-кратный приём';
+const every=n=>n>=1?'каждые '+Math.round(24/n)+' ч ('+kratn(n)+' приём)':'каждые '+Math.round(24/n)+' ч';
+const timesTxt=n=>kratn(n)+' приём';
 
 function specOf(d,ageM,kg){return typeof d.spec==='function'?d.spec(ageM,kg):d.spec}
 
@@ -37,12 +41,12 @@ function stdLines(r,spec,adult){
   if(r.needKg)return '<div>Введите массу тела для расчёта.</div>';
   const u=r.u,L=[];
   if(r.per)L.push(`<div>Разовая доза: <b>${rng(r.per[0],r.per[1],u)}</b></div>`);
-  if(r.n)L.push(`<div>Кратность: <b>${r.n[0]===r.n[1]?timesTxt(r.n[0]):`${r.n[0]}–${r.n[1]} раза`} в сутки</b></div>`);
+  if(r.n)L.push(`<div>Кратность: <b>${freqText(r.n[0],r.n[1])}</b></div>`);
   else L.push('<div>Кратность: по инструкции</div>');
   if(r.daily)L.push(`<div>Суточная доза: <b>${rng(r.daily[0],r.daily[1],u)}</b>${r.capped?' (ограничено максимумом из таблицы)':''}</div>`);
   if(!r.per&&r.n&&r.daily){
     const a=Math.round(r.n[0]),b=Math.round(r.n[1]);
-    if(b>a||true){for(let k=a;k<=b;k++)L.push(`<div>При ${timesTxt(k)} в сутки: ${rng(r.daily[0]/k,r.daily[1]/k,u)} на введение</div>`)}
+    if(b>a||true){for(let k=a;k<=b;k++)L.push(`<div>При ${kratnP(k)} приёме: ${rng(r.daily[0]/k,r.daily[1]/k,u)} на введение</div>`)}
   }
   if(r.first){
     if(typeof r.first==='string')L.push(`<div>${r.first}</div>`);
@@ -79,7 +83,7 @@ function renalBlock(d,spec,r,gfr,adult){
         L.push(`<div>Кратность: <b>${every(b.n)}</b></div>`);
         if(b.n>=1)L.push(`<div>Суточная доза: <b>${rng(p2[0]*b.n,p2[1]*b.n,u)}</b></div>`);
       }else if(r.n){
-        L.push(`<div>Кратность: <b>как обычно, ${r.n[0]===r.n[1]?timesTxt(r.n[0]):r.n[0]+'–'+r.n[1]+' раза'} в сутки</b></div>`);
+        L.push(`<div>Кратность: <b>как обычно, ${freqText(r.n[0],r.n[1])}</b></div>`);
         L.push(`<div>Суточная доза: <b>${rng(p2[0]*r.n[0],p2[1]*r.n[1],u)}</b></div>`);
       }
     }else if(r.daily){
@@ -100,7 +104,7 @@ function drugCard(d,P,open){
   const r=calcSpec(spec,kg);
   let vk=null,ref=false,body='',badge='',sum='';
   const msgC=d.contra?d.contra(ageM,kg):null;
-  const gap=d.gap?d.gap(ageM):null;
+  const gap=d.gap?d.gap(ageM,kg):null;
   if(msgC){vk=msgC;ref=!!d.ref}
   else if(gap){vk=gap}
   else if(!spec){vk='В таблице СКАТ нет дозы для этого возраста.'}
@@ -164,7 +168,7 @@ function initAbt(){
     opts.forEach((o,i)=>o.classList.toggle('act',i===act));
     opts[act].scrollIntoView({block:'nearest'});el.din.setAttribute('aria-activedescendant',opts[act].id);
   };
-  el.foot.innerHTML='<a href="https://doi.org/10.17513/np.318" target="_blank" rel="noopener">Программа СКАТ</a>';
+  el.foot.innerHTML='<a href="skat-2025.pdf" target="_blank" rel="noopener">Программа СКАТ (издание 2025 года), PDF</a>';
   function render(){
     const P0=state(),{ageM,kg,gfr,adult}=P0;
     el.renal.classList.toggle('on',el.on.checked);
